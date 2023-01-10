@@ -21,7 +21,7 @@ class ProjectTableSeeder extends Seeder
             $project = new Project();
             $project->title=$faker->sentence(3);
             $project->slug = Str::slug($project->title, '-');
-            $project->contnet = $faker->text(500);
+            $project->content = $faker->text(500);
             $project->save();
         };
     }
