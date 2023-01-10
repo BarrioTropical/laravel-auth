@@ -3,7 +3,7 @@
 @section('content')
 
 <ul>
-    @foreach ($projects as $$project)
+    @foreach ($projects as $project)
         <li>{{$projects->title}}</li>
     @endforeach
 </ul>
