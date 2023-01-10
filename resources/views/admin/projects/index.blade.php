@@ -4,7 +4,7 @@
 
 <ul>
     @foreach ($projects as $project)
-        <li>{{$projects->title}}</li>
+        <li>{{$project->title}}</li>
     @endforeach
 </ul>
 
