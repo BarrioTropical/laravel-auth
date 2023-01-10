@@ -4,7 +4,7 @@
 
 <ul>
     @foreach ($projects as $project)
-        <li>{{$project->title}}</li>
+        <a class="btn btn-primary text-white btn-sm" href="{{route('admin.projects.show', $project->slug)}}" title="View Project">{{$project->title}}</a>
     @endforeach
 </ul>
 
