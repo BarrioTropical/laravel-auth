@@ -138,7 +138,7 @@
                 aria-expanded="false"
               >
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                  src="#"
                   class="rounded-circle"
                   height="22"
                   alt="Avatar"
