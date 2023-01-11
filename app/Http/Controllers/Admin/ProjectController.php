@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 
 class ProjectController extends Controller
@@ -22,7 +23,7 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function create()
     {
@@ -35,9 +36,13 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $slug = Project::generateSlug($request->title);
+        $data['slug'] = $slug;
+        $new_project = Project::create($data);
+        return redirect()->route('admin.projects.show', $new_project->slug);
     }
 
     /**
@@ -57,9 +62,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        return view('admin.projects.edit');
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -69,9 +74,13 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request,Project $project)
     {
-        //
+        $data = $request->validated();
+        $slug = Project::generateSlug($request->title);
+        $data['slug'] = $slug;
+        $project->update($data);
+        return redirect()->route('admin.project.index')->with('message', "$project->title deleted successfully");
     }
 
     /**

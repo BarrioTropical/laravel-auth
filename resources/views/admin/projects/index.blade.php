@@ -3,6 +3,7 @@
 @section('content')
 
 <h1>Projects</h1>
+<a class="btn btn-success" href="{{route('admin.projects.create')}}">Crea nuovo progetto</a>
     @if(session()->has('message'))
     <div class="alert alert-success mb-3 mt-3">
         {{ session()->get('message') }}
@@ -30,6 +31,7 @@
                         @method('DELETE')
                         <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$project->title}}"><i class="fa-solid fa-trash-can"></i></button>
                      </form>
+                    </td>
                 </tr>
                 @endforeach
 
