@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -35,12 +36,18 @@ class ProjectController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
      */
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
         $slug = Project::generateSlug($request->title);
         $data['slug'] = $slug;
+        if($request->hasFile('cover_image')){
+            $path = Storage::disk('public')->put('portfolio_images', $request->cover_image);
+            $data['cover_image'] = $path; 
+        }
+        
         $new_project = Project::create($data);
         return redirect()->route('admin.projects.show', $new_project->slug);
     }
@@ -79,6 +86,13 @@ class ProjectController extends Controller
         $data = $request->validated();
         $slug = Project::generateSlug($request->title);
         $data['slug'] = $slug;
+        if($request->hasFile('cover_image')){
+            if ($project->cover_image){
+                Storage::delete($project->cover_image);
+            }
+            $path = Storage::disk('public')->put('portfolio_images', $request->cover_image);
+            $data['cover_image'] = $path; 
+        }
         $project->update($data);
         return redirect()->route('admin.project.index')->with('message', "$project->title deleted successfully");
     }

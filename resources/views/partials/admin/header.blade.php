@@ -18,9 +18,9 @@
           <!-- Brand -->
           <a class="navbar-brand" href="#">
             <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+              src="#"
               height="25"
-              alt="MDB Logo"
+              alt="Barrio Tropical"
               loading="lazy"
             />
           </a>
