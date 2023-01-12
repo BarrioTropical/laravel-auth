@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -38,7 +38,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $data = $request->validated();
+        $slug = Category::generateSlug($request->name);
+        $data['slug'] = $slug;
+        $new_category = Category::create($data);
+        return redirect()->route('admin.categories.show', $new_category->slug);
     }
 
     /**
@@ -49,7 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -60,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -72,8 +76,13 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $data = $request->validated();
+        $slug = Category::generateSlug($request->title);
+        $data['slug'] = $slug;
+        $category->update($data);
+        return redirect()->route('admin.category.index')->with('message', "$category->name deleted successfully");
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -83,6 +92,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('admin.category.index')->with('message', "$category->name deleted successfully");
     }
 }

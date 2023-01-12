@@ -2,8 +2,11 @@
 
 @section('content')
 
-<h1>{{$project->title}}</h1>
-    <p>{{$project->content}}</p>
-    <img width="300" src="{{ asset('storage/' . $project->cover_image)}}">
+<h1>{{$category->name}}</h1>
+   <ul>
+    @foreach($category->projects as $project)
+    <li>{{$project.title}}</li>
+    @endforeach
+   </ul>
 
 @endsection
