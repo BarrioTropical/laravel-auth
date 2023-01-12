@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h1>Projects</h1>
+<h1>Categories</h1>
 <div class="text-end">
-        <a class="btn btn-success" href="{{route('admin.projects.create')}}">Crea nuovo post</a>
+        <a class="btn btn-success" href="{{route('admin.categories.create')}}">Crea nuova categoria</a>
 </div>
     @if(session()->has('message'))
     <div class="alert alert-success mb-3 mt-3">
@@ -15,23 +15,23 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
+            <th scope="col">Name</th>
+            <th scope="col">Projects</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($projects as $project)
+        @foreach($categories as $category)
                 <tr>
-                    <th scope="row">{{$project->id}}</th>
-                    <td><a href="{{route('admin.projects.show', $project->slug)}}" title="View Project">{{$project->title}}</a></td>
-                    <td>{{Str::limit($project->content,100)}}</td>
-                    <td><a class="link-secondary" href="{{route('admin.projects.edit', $project->slug)}}" title="Edit Project"><i class="fa-solid fa-pen"></i></a></td>
-                    <td> <form action="{{route('admin.projects.destroy', $project->slug)}}" method="POST">
+                    <th scope="row">{{$category->id}}</th>
+                    <td><a href="{{route('admin.categories.show', $category->slug)}}" title="View Category">{{$category->name}}</a></td>
+                    <td>{{count($category->projects)}}</td>
+                    <td><a class="link-secondary" href="{{route('admin.categories.edit', $category->slug)}}" title="Edit Category"><i class="fa-solid fa-pen"></i></a></td>
+                    <td> <form action="{{route('admin.categories.destroy', $category->slug)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$project->title}}"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$category->name}}"><i class="fa-solid fa-trash-can"></i></button>
                      </form>
                     </td>
                 </tr>

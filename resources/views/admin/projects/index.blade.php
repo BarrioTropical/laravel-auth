@@ -4,7 +4,7 @@
 
 <h1>Projects</h1>
 <div class="text-end">
-        <a class="btn btn-success" href="{{route('admin.projects.create')}}">Crea nuovo post</a>
+        <a class="btn btn-success" href="{{route('admin.projects.create')}}">Crea nuovo progetto</a>
 </div>
     @if(session()->has('message'))
     <div class="alert alert-success mb-3 mt-3">
