@@ -46,7 +46,7 @@ class ProjectController extends Controller
         $slug = Project::generateSlug($request->title);
         $data['slug'] = $slug;
         if($request->hasFile('cover_image')){
-            $path = Storage::disk('public')->put('portfolio_images', $request->cover_image);
+            $path = Storage::put('project_images', $request->cover_image);
             $data['cover_image'] = $path; 
         }
         
@@ -107,7 +107,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
-    {
+    {   
+        if($project->cover_image){
+            Storage::delete($project->cover_image);
+        }
+
         $project->delete();
         return redirect()->route('admin.project.index')->with('message', "$project->title deleted successfully");
     }
