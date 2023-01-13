@@ -18,6 +18,7 @@
             <th scope="col">Title</th>
             <th scope="col">Content</th>
             <th scope="col">Category</th>
+            <th scope="col">Tags</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
@@ -29,6 +30,7 @@
                     <td><a href="{{route('admin.projects.show', $project->slug)}}" title="View Project">{{$project->title}}</a></td>
                     <td>{{Str::limit($project->content,100)}}</td>
                     <td>{{$project->category ? $project->category->name : 'Senza categoria'}}</td>
+                    <td>{{$project->tags && count($project->tags) > 0 ? count(project->tags) : 0}}</td>
                     <td><a class="link-secondary" href="{{route('admin.projects.edit', $project->slug)}}" title="Edit Project"><i class="fa-solid fa-pen"></i></a></td>
                     <td> <form action="{{route('admin.projects.destroy', $project->slug)}}" method="POST">
                         @csrf
