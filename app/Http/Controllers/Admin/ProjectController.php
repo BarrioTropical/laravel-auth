@@ -31,7 +31,6 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.projects.create', compact('categories', 'tags'));
         $tags = Tag::all();
         return view('admin.projects.create', compact('categories','tags'));
     }
@@ -80,7 +79,6 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::all();
-        return view('admin.projects.edit', compact('project', 'categories', 'tags'));
         $tags = Tag::all();
         return view('admin.projects.edit', compact('project', 'categories', 'tags'));
         
@@ -108,6 +106,8 @@ class ProjectController extends Controller
         $project->update($data);
         if($request->has('tags')){
             $project->tags()->sync($request->tags);
+        } else {
+            $project->tags()->sync([]);
         }
         return redirect()->route('admin.project.index')->with('message', "$project->title deleted successfully");
     }

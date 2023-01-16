@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('project_tag', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id')->nullable();
-            $table->foreign('project_id')->reference('id')->xon('projects')->cascadeOnDelete();
+            $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete();
             
             $table->unsignedBigInteger('tag_id')->nullable();
-            $table->foreign('tag_id')->reference('id')->xon('tags')->cascadeOnDelete();
+            $table->foreign('tag_id')->references('id')->on('tags')->cascadeOnDelete();
         });
     }
 

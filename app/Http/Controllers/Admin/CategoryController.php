@@ -51,8 +51,18 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    // public function show(Category $category)
+    public function show($slug)
     {
+        if(Auth::user()->isAdmin()){
+            $category = Category::where('slug', $slug)->first();
+        } else {
+            $category = Category::where('slug', $slug)->with([
+                'projects' => function ($query) {
+                    $query->where('user_id', Auth::id());
+                }
+            ])->first();
+        }
         return view('admin.categories.show', compact('category'));
     }
 

@@ -25,16 +25,16 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    //public function create()
+   // {
         //
-    }
+    //}
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTagRequest  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(StoreTagRequest $request)
     {
@@ -46,6 +46,7 @@ class TagController extends Controller
 
         // redirect
         return redirect()->back()->with('message', "Tag $slug added successfully");
+
     }
 
     /**
@@ -54,10 +55,10 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
-    {
+   // public function show(Tag $tag)
+    //{
         //
-    }
+    //}
 
     /**
      * Show the form for editing the specified resource.
@@ -65,17 +66,17 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
-    {
+    //public function edit(Tag $tag)
+    //{
         //
-    }
+    //}
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateTagRequest  $request
      * @param  \App\Models\Tag  $tag
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
